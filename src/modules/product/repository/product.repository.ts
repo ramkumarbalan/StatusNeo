@@ -1,8 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import e from "express";
 import { Mode } from "fs";
 import { Model } from "mongoose";
+import { formatErrorResponse } from "src/common/response-formatter";
 import { Product } from "src/modules/product/schema/product.schema";
 import { CreateProductRequestDto } from "../dto/create-product-request.dto";
 import { UpdateProductRequestDto } from "../dto/update-product-request.dto";
@@ -20,7 +21,7 @@ export class ProductRepository {
                 return data;
             })
         } catch(e) {
-            throw e.message;
+            return formatErrorResponse(e.message, HttpStatus.BAD_REQUEST)
         }
     }
 
