@@ -9,9 +9,5 @@ export const formatSuccessResposne = (data) => {
 }
 
 export const formatErrorResponse = (error, statusCode) => {
-    return {
-        status: statusCode,
-        data: null,
-        error: error
-    }
+     throw new  HttpException({message: error}, statusCode) 
 }
